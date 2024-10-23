@@ -1,4 +1,9 @@
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes,
+  Navigate,
+} from "react-router-dom";
 import "./App.css";
 import routes from "./Routes/Routes";
 import SignIn from "./components/Auth/SignIn/SignIn";
@@ -22,6 +27,7 @@ function App() {
       <Router>
         {loggedInUser?.isAuthenticated && <Navbar />}
         <Routes>
+          <Route path="/" element={<Navigate to={routes.SIGNIN} />} />
           <Route path={routes.SIGNUP} element={<SignUp />} />
           <Route path={routes.SIGNIN} element={<SignIn />} />
           <Route path={routes.FORGOTPASSWORD} element={<ForgotPassword />} />

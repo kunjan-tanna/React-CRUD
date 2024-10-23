@@ -35,7 +35,7 @@ const EditProfile = () => {
   }, [loggedInUser, setValue]);
 
   const onSubmit = (data) => {
-    console.log("FINAL", data);
+    // console.log("FINAL", data);
     const emailExists = users.some(
       (user) => user.email === data.email && user.email !== loggedInUser.email
     );

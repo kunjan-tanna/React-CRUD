@@ -27,7 +27,7 @@ const SignIn = () => {
   const password = watch("password");
 
   const onSubmit = (data) => {
-    console.log("FINAL", data);
+    // console.log("FINAL", data);
     const response = login(data.email, data.password);
     if (response.success) {
       displayLog(1, "Login Successful");

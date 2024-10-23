@@ -27,7 +27,7 @@ const SignUp = () => {
   const password = watch("password");
 
   const onSubmit = (data) => {
-    console.log("FINAL", data);
+    // console.log("FINAL", data);
     const response = signup(data);
     if (response.success) {
       displayLog(1, "User is Created");

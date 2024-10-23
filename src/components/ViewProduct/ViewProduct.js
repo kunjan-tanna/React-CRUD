@@ -69,7 +69,7 @@ function ViewProduct() {
             Brand: {product.brand}
           </Typography>
           <Typography variant="body2" className={styles.textContent}>
-            Rating: {product.rating} ★
+            Rating: {product.rating}
           </Typography>
           <Typography variant="body2" className={styles.textContent}>
             Price: ${product.price}
