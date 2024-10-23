@@ -11,6 +11,7 @@ import ForgotPassword from "./components/Auth/ForgotPassword/ForgotPassword";
 import Navbar from "./components/NavBar/NavBar";
 import EditProfile from "./components/EditProfile/EditProfile";
 import { useContext } from "react";
+import ProductList from "./components/Products/ProductList";
 
 function App() {
   const { loggedInUser } = useContext(AuthContext);
@@ -26,6 +27,10 @@ function App() {
           <Route
             path={routes.EDITPROFILE}
             element={<ProtectedRoute>{<EditProfile />}</ProtectedRoute>}
+          />
+          <Route
+            path={routes.LISTPRODUCTS}
+            element={<ProtectedRoute>{<ProductList />}</ProtectedRoute>}
           />
         </Routes>
       </Router>
