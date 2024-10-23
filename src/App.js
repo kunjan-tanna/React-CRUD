@@ -8,24 +8,24 @@ import { AuthContext, AuthProvider } from "./context/AuthContext";
 import "alertifyjs/build/css/alertify.css";
 import ProtectedRoute from "./ProtectedRoute";
 import ForgotPassword from "./components/Auth/ForgotPassword/ForgotPassword";
-import Navbar from "./components/NavBar";
+import Navbar from "./components/NavBar/NavBar";
+import EditProfile from "./components/EditProfile/EditProfile";
+import { useContext } from "react";
 
 function App() {
+  const { loggedInUser } = useContext(AuthContext);
+  console.log("loggedInUser", loggedInUser);
   return (
     <>
       <Router>
-        <ProtectedRoute>
-          <Navbar />
-        </ProtectedRoute>
+        {loggedInUser?.isAuthenticated && <Navbar />}
         <Routes>
           <Route path={routes.SIGNUP} element={<SignUp />} />
           <Route path={routes.SIGNIN} element={<SignIn />} />
           <Route path={routes.FORGOTPASSWORD} element={<ForgotPassword />} />
           <Route
             path={routes.EDITPROFILE}
-            element={
-              <ProtectedRoute>{/* <ChangePassword /> */}</ProtectedRoute>
-            }
+            element={<ProtectedRoute>{<EditProfile />}</ProtectedRoute>}
           />
         </Routes>
       </Router>

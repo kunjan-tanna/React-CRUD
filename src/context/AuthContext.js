@@ -7,7 +7,9 @@ export const AuthProvider = ({ children }) => {
   const [users, setUsers] = useState(
     JSON.parse(localStorage.getItem("users")) || []
   );
-  const [loggedInUser, setLoggedInUser] = useState(null);
+  const [loggedInUser, setLoggedInUser] = useState(
+    JSON.parse(localStorage.getItem("userData")) || null
+  );
 
   const encryptPassword = (password) => {
     return CryptoJS.AES.encrypt(password, "secret-key").toString();
@@ -40,12 +42,15 @@ export const AuthProvider = ({ children }) => {
     if (decryptPassword(user.password) !== password) {
       return { error: "Invalid password" };
     }
+    user.isAuthenticated = true;
     setLoggedInUser(user);
+    localStorage.setItem("userData", JSON.stringify(user));
     return { success: true };
   };
 
   const logout = () => {
     setLoggedInUser(null);
+    localStorage.setItem("userData", null);
   };
 
   const forgotPassword = (newPassword, currentPassword) => {
@@ -65,6 +70,24 @@ export const AuthProvider = ({ children }) => {
     setUsers(updatedUsers);
     return { success: true };
   };
+  const updateUser = (data) => {
+    const updatedUser = {
+      ...loggedInUser,
+      firstName: data.firstName,
+      lastName: data.lastName,
+      email: data.email,
+      mobile: data.mobile,
+    };
+    const updatedUsers = users.map((user) =>
+      user.email === loggedInUser.email ? updatedUser : user
+    );
+    console.log("updatedUsers", updatedUsers);
+    localStorage.setItem("users", JSON.stringify(updatedUsers));
+    localStorage.setItem("userData", JSON.stringify(updatedUser));
+    setUsers(updatedUsers);
+    setLoggedInUser(updatedUser);
+    return { success: true };
+  };
 
   return (
     <AuthContext.Provider
@@ -76,6 +99,7 @@ export const AuthProvider = ({ children }) => {
         users,
         decryptPassword,
         forgotPassword,
+        updateUser,
       }}
     >
       {children}

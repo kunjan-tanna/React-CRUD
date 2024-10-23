@@ -1,13 +1,12 @@
 import React, { useContext } from "react";
 import { AppBar, Toolbar, Typography, Button, Box } from "@mui/material";
 import { NavLink, useNavigate } from "react-router-dom";
-import routes from "../Routes/Routes";
-import { AuthContext } from "../context/AuthContext";
+import routes from "../../Routes/Routes";
+import { AuthContext } from "../../context/AuthContext";
 import styles from "./NavBar.module.css";
 
 const Navbar = () => {
   const { loggedInUser, logout } = useContext(AuthContext);
-  console.log("loggedInUser...", loggedInUser);
   const navigate = useNavigate();
 
   const handleLogout = () => {
@@ -22,7 +21,7 @@ const Navbar = () => {
           React CRUD
         </Typography>
 
-        {loggedInUser && (
+        {loggedInUser?.isAuthenticated && (
           <Box className={styles.container}>
             <Button
               color="inherit"

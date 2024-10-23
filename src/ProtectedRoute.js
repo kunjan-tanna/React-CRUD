@@ -5,8 +5,7 @@ import routes from "./Routes/Routes";
 
 const ProtectedRoute = ({ children }) => {
   const { loggedInUser } = useContext(AuthContext);
-  console.log("loggedInUser", loggedInUser);
-  if (!loggedInUser) {
+  if (!loggedInUser?.isAuthenticated) {
     return <Navigate to={routes.SIGNIN} />;
   }
 
