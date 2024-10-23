@@ -1,0 +1,7 @@
+.navBarTitle {
+  flex-grow: 1;
+}
+.container {
+  display: block;
+  gap: 33;
+}

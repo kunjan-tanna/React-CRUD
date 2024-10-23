@@ -31,9 +31,7 @@ const SignIn = () => {
     const response = login(data.email, data.password);
     if (response.success) {
       displayLog(1, "Login Successful");
-      setTimeout(() => {
-        navigate(routes.EDITPROFILE);
-      }, 500);
+      navigate(routes.EDITPROFILE);
     } else {
       displayLog(0, response.error);
     }

@@ -8,25 +8,27 @@ import { AuthContext, AuthProvider } from "./context/AuthContext";
 import "alertifyjs/build/css/alertify.css";
 import ProtectedRoute from "./ProtectedRoute";
 import ForgotPassword from "./components/Auth/ForgotPassword/ForgotPassword";
+import Navbar from "./components/NavBar";
 
 function App() {
   return (
     <>
-      <AuthProvider>
-        <Router>
-          <Routes>
-            <Route path={routes.SIGNUP} element={<SignUp />} />
-            <Route path={routes.SIGNIN} element={<SignIn />} />
-            <Route path={routes.FORGOTPASSWORD} element={<ForgotPassword />} />
-            <Route
-              path={routes.EDITPROFILE}
-              element={
-                <ProtectedRoute>{/* <ChangePassword /> */}</ProtectedRoute>
-              }
-            />
-          </Routes>
-        </Router>
-      </AuthProvider>
+      <Router>
+        <ProtectedRoute>
+          <Navbar />
+        </ProtectedRoute>
+        <Routes>
+          <Route path={routes.SIGNUP} element={<SignUp />} />
+          <Route path={routes.SIGNIN} element={<SignIn />} />
+          <Route path={routes.FORGOTPASSWORD} element={<ForgotPassword />} />
+          <Route
+            path={routes.EDITPROFILE}
+            element={
+              <ProtectedRoute>{/* <ChangePassword /> */}</ProtectedRoute>
+            }
+          />
+        </Routes>
+      </Router>
     </>
   );
 }
