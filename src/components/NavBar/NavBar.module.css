@@ -5,3 +5,7 @@
   display: block;
   gap: 33;
 }
+.activeTab {
+  color: #ff4081 !important;
+  font-weight: bold;
+}

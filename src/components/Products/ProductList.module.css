@@ -43,3 +43,8 @@
 .showPage {
   margin: 0 20px !important;
 }
+.productLink {
+  color: var(--secondary-color);
+  text-decoration: none !important;
+  cursor: pointer;
+}

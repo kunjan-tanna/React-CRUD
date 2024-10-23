@@ -27,10 +27,34 @@ const Navbar = () => {
               color="inherit"
               component={NavLink}
               to={routes.LISTPRODUCTS}
+              sx={{
+                color: "inherit",
+                "&.active": {
+                  color: "#ff4081",
+                  fontWeight: "bold",
+                },
+              }}
+              // className={({ isActive }) =>
+              //   isActive ? styles.activeTab : undefined
+              // }
             >
               Products
             </Button>
-            <Button color="inherit" component={NavLink} to={routes.EDITPROFILE}>
+            <Button
+              color="inherit"
+              component={NavLink}
+              to={routes.EDITPROFILE}
+              sx={{
+                color: "inherit",
+                "&.active": {
+                  color: "#ff4081",
+                  fontWeight: "bold",
+                },
+              }}
+              // className={({ isActive }) =>
+              //   isActive ? styles.activeTab : undefined
+              // }
+            >
               Edit Profile
             </Button>
             <Button color="inherit" onClick={handleLogout}>

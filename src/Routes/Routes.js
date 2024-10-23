@@ -4,7 +4,7 @@ const routes = {
   FORGOTPASSWORD: "/forgot-password",
   EDITPROFILE: "/edit-profile",
   LISTPRODUCTS: "/list-products",
-  VIEWPRODUCT: "/view-product/:productId",
+  VIEWPRODUCT: "/products/:id",
 };
 
 export default routes;

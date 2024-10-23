@@ -1,0 +1,28 @@
+.loader {
+  text-align: center;
+  margin-top: 50px;
+}
+
+.productTitle {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.cardContainer {
+  margin-top: 20px;
+}
+
+.productImage {
+  width: 100%;
+  object-fit: contain;
+}
+
+.textContent {
+  margin-top: 10px;
+}
+
+.paginationContainer {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}

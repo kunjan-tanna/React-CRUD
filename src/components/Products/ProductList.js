@@ -12,6 +12,8 @@ import {
   Button,
 } from "@mui/material";
 import styles from "./ProductList.module.css";
+import routes from "../../Routes/Routes";
+import { Link } from "react-router-dom";
 
 function ProductList() {
   const [products, setProducts] = useState([]);
@@ -57,35 +59,40 @@ function ProductList() {
         {!loading &&
           products.map((product) => (
             <Grid item xs={12} sm={6} md={4} lg={3} key={product.id}>
-              <Card className={styles.cardContainer}>
-                <CardMedia
-                  component="img"
-                  alt={product.title}
-                  height="140"
-                  image={product.thumbnail}
-                  title={product.title}
-                />
-                <CardContent className={styles.cardContent}>
-                  <Typography variant="h6" component="div">
-                    {product.title}
-                  </Typography>
-                  <Typography variant="body2" className={styles.textContent}>
-                    Category: {product.category}
-                  </Typography>
-                  <Typography variant="body2" className={styles.textContent}>
-                    Brand: {product.brand}
-                  </Typography>
-                  <Typography variant="body2" className={styles.textContent}>
-                    Rating: {product.rating} ★
-                  </Typography>
-                  <Typography variant="body2" className={styles.textContent}>
-                    Price: ${product.price}
-                  </Typography>
-                  <Typography variant="body2" className={styles.textContent}>
-                    Discount: {product.discountPercentage}%
-                  </Typography>
-                </CardContent>
-              </Card>
+              <Link
+                to={`/products/${product.id}`}
+                className={styles.productLink}
+              >
+                <Card className={styles.cardContainer}>
+                  <CardMedia
+                    component="img"
+                    alt={product.title}
+                    height="140"
+                    image={product.thumbnail}
+                    title={product.title}
+                  />
+                  <CardContent className={styles.cardContent}>
+                    <Typography variant="h6" component="div">
+                      {product.title}
+                    </Typography>
+                    <Typography variant="body2" className={styles.textContent}>
+                      Category: {product.category}
+                    </Typography>
+                    <Typography variant="body2" className={styles.textContent}>
+                      Brand: {product.brand}
+                    </Typography>
+                    <Typography variant="body2" className={styles.textContent}>
+                      Rating: {product.rating} ★
+                    </Typography>
+                    <Typography variant="body2" className={styles.textContent}>
+                      Price: ${product.price}
+                    </Typography>
+                    <Typography variant="body2" className={styles.textContent}>
+                      Discount: {product.discountPercentage}%
+                    </Typography>
+                  </CardContent>
+                </Card>
+              </Link>
             </Grid>
           ))}
       </Grid>

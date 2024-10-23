@@ -12,6 +12,7 @@ import Navbar from "./components/NavBar/NavBar";
 import EditProfile from "./components/EditProfile/EditProfile";
 import { useContext } from "react";
 import ProductList from "./components/Products/ProductList";
+import ViewProduct from "./components/ViewProduct/ViewProduct";
 
 function App() {
   const { loggedInUser } = useContext(AuthContext);
@@ -31,6 +32,10 @@ function App() {
           <Route
             path={routes.LISTPRODUCTS}
             element={<ProtectedRoute>{<ProductList />}</ProtectedRoute>}
+          />
+          <Route
+            path={routes.VIEWPRODUCT}
+            element={<ProtectedRoute>{<ViewProduct />}</ProtectedRoute>}
           />
         </Routes>
       </Router>
