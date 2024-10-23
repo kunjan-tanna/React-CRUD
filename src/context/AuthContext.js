@@ -48,9 +48,35 @@ export const AuthProvider = ({ children }) => {
     setLoggedInUser(null);
   };
 
+  const forgotPassword = (newPassword, currentPassword) => {
+    // console.log(currentPassword);
+    const updatedUsers = users.map((user) =>
+      decryptPassword(user.password) === currentPassword
+        ? {
+            ...user,
+            password: encryptPassword(newPassword),
+            confirmPassword: encryptPassword(newPassword),
+          }
+        : user
+    );
+
+    // console.log("FINALL", updatedUsers);
+    localStorage.setItem("users", JSON.stringify(updatedUsers));
+    setUsers(updatedUsers);
+    return { success: true };
+  };
+
   return (
     <AuthContext.Provider
-      value={{ signup, login, logout, loggedInUser, users }}
+      value={{
+        signup,
+        login,
+        logout,
+        loggedInUser,
+        users,
+        decryptPassword,
+        forgotPassword,
+      }}
     >
       {children}
     </AuthContext.Provider>

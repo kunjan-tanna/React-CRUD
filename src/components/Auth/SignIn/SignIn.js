@@ -64,6 +64,14 @@ const SignIn = () => {
                 className={styles.formField}
               />
             </Grid>
+            <Grid item xs={12}>
+              <NavLink
+                to={routes.FORGOTPASSWORD}
+                className={styles.forgotPassword}
+              >
+                Forgot Password?
+              </NavLink>
+            </Grid>
 
             <Grid item xs={12}>
               <TextField
@@ -89,6 +97,8 @@ const SignIn = () => {
               <Button type="submit" fullWidth className={styles.submitButton}>
                 Sign In
               </Button>
+              <br />
+              <br />
               <Typography variant="body2" className={styles.linkField}>
                 Don't have an account?{" "}
                 <NavLink to={routes.SIGNUP}>Create Account</NavLink>

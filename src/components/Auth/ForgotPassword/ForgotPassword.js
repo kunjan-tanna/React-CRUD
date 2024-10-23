@@ -9,14 +9,13 @@ import {
   Grid,
 } from "@mui/material";
 import { NavLink, useNavigate } from "react-router-dom";
-import styles from "./SignUp.module.css";
+import styles from "./ForgotPassword.module.css";
 import { AuthContext } from "../../../context/AuthContext";
 import { displayLog } from "../../../utils/functions";
 import routes from "../../../Routes/Routes";
 
-const SignUp = () => {
-  const { signup } = useContext(AuthContext);
-
+const ForgotPassword = () => {
+  const { decryptPassword, users, forgotPassword } = useContext(AuthContext);
   const {
     register,
     handleSubmit,
@@ -25,12 +24,24 @@ const SignUp = () => {
   } = useForm();
   const navigate = useNavigate();
   const password = watch("password");
+  const currentPassword = watch("currentPassword");
 
   const onSubmit = (data) => {
-    console.log("FINAL", data);
-    const response = signup(data);
+    // console.log("FINAL", data);
+    const { currentPassword, password } = data;
+    const usersData = users.find(
+      (u) => decryptPassword(u.password) == currentPassword
+    );
+    if (usersData === undefined) {
+      displayLog(
+        0,
+        "Current password is not the same as the user's current password"
+      );
+      return;
+    }
+    const response = forgotPassword(password, currentPassword);
     if (response.success) {
-      displayLog(1, "User is Created");
+      displayLog(1, "Rest Password Success");
       setTimeout(() => {
         navigate(routes.SIGNIN);
       }, 500);
@@ -43,68 +54,24 @@ const SignUp = () => {
     <Container maxWidth="sm">
       <Box className={styles.formContainer}>
         <Typography variant="h4" className={styles.formTitle}>
-          Sign Up
+          Forgot Password
         </Typography>
 
         <form onSubmit={handleSubmit(onSubmit)} noValidate>
           <Grid container spacing={2}>
-            <Grid item xs={12} sm={6}>
-              <TextField
-                {...register("firstName", {
-                  required: "First Name is required",
-                })}
-                fullWidth
-                label="First Name"
-                error={!!errors.firstName}
-                helperText={errors.firstName?.message}
-                className={styles.formField}
-              />
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <TextField
-                {...register("lastName", { required: "Last Name is required" })}
-                fullWidth
-                label="Last Name"
-                error={!!errors.lastName}
-                helperText={errors.lastName?.message}
-                className={styles.formField}
-              />
-            </Grid>
-
             <Grid item xs={12}>
               <TextField
-                {...register("email", {
-                  required: "Email is required",
-                  pattern: {
-                    value: /^\S+@\S+$/i,
-                    message: "Enter a valid email",
-                  },
+                {...register("currentPassword", {
+                  required: "Current Password is required",
                 })}
                 fullWidth
-                label="Email"
-                error={!!errors.email}
-                helperText={errors.email?.message}
+                label="Current Password"
+                type="password"
+                error={!!errors.currentPassword}
+                helperText={errors.currentPassword?.message}
                 className={styles.formField}
               />
             </Grid>
-
-            <Grid item xs={12}>
-              <TextField
-                {...register("mobile", {
-                  required: "Mobile number is required",
-                  pattern: {
-                    value: /^[0-9]{10}$/,
-                    message: "Enter a valid 10-digit number",
-                  },
-                })}
-                fullWidth
-                label="Mobile"
-                error={!!errors.mobile}
-                helperText={errors.mobile?.message}
-                className={styles.formField}
-              />
-            </Grid>
-
             <Grid item xs={12}>
               <TextField
                 {...register("password", {
@@ -115,6 +82,9 @@ const SignUp = () => {
                     message:
                       "Password must be 8-32 characters long and contain at least one uppercase letter, one lowercase letter, one number, and one special character",
                   },
+                  validate: (value) =>
+                    value !== currentPassword ||
+                    "New password should not be same as current password",
                 })}
                 fullWidth
                 label="Password"
@@ -142,11 +112,10 @@ const SignUp = () => {
 
             <Grid item xs={12}>
               <Button type="submit" fullWidth className={styles.submitButton}>
-                Sign Up
+                Reset Password
               </Button>
-              <br />
               <Typography variant="body2" color="textSecondary" mt={2}>
-                Already have an account?{" "}
+                Remember the password? please click{" "}
                 <NavLink to={routes.SIGNIN}>Login</NavLink>
               </Typography>
             </Grid>
@@ -157,4 +126,4 @@ const SignUp = () => {
   );
 };
 
-export default SignUp;
+export default ForgotPassword;
